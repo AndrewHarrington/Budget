@@ -11,9 +11,8 @@
 </head>
 <body>
     <div class="container">
-        <div class="row shadow-sm bg-white rounded p-2">
-            <h1>Welcome to the Budget Calculator</h1>
-            <hr>
+        <div class="row shadow-sm bg-white rounded p-2 my-2">
+            <h1 class="text-center border-bottom pb-2 w-100">Welcome to the Budget Calculator</h1>
 
             <p> This page will allow you to manage expenses based on what you are paid.</p>
 
@@ -30,8 +29,29 @@
         </div>
 
         <div class="row">
-            <div class="container shadow-sm bg-white rounded">
+            <div class="container shadow-sm bg-light rounded p-2 mt-2 w-50">
+                <p class="text-center">Sign In</p>
+                <hr>
+                <form action="#" method="post">
+                    <label class="w-100 px-5">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                    </label>
+                    <label class="w-100 px-5">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    </label>
+                    <label class="w-100 px-5">
+                        <input class="btn btn-primary text-uppercase w-100" type="submit" value="Login">
+                    </label>
 
+                    <hr>
+
+                    <p class="text-center">Create a New Account</p>
+
+                    <label class="w-100 px-5">
+                        <a href="#" class="btn btn-primary text-uppercase w-100">Create Account</a>
+                    </label>
+
+                </form>
             </div>
         </div>
 
