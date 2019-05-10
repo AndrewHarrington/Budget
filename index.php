@@ -12,6 +12,14 @@ require_once "vendor/autoload.php";
 $f3 = Base::instance();
 
 // Turn on Fat-Free error reporting
+set_exception_handler(function($obj) use($f3){
+    $f3->error(500,$obj->getmessage(),$obj->gettrace());
+});
+set_error_handler(function($code,$text) use($f3) {
+    if (error_reporting()) {
+        $f3->error(500,$text);
+    }
+});
 $f3->set('DEBUG', 3);
 
 // Define a default route
