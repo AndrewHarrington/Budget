@@ -10,7 +10,62 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container shadow-sm p-5 mb-5 mt-2 bg-white rounded w-50">
+        <h1 class="text-center">Create Your Account</h1>
+        <hr>
 
+        <form>
+            <div class="row">
+                <div class="col-6">
+                    <label class="w-100">
+                        <strong>First Name</strong>
+                        <br>
+
+                        <input type="text" name="fname" class="form-control">
+                    </label>
+                </div>
+                <div class="col-6">
+                    <label class="w-100">
+                        <strong>Last Name</strong>
+                        <br>
+
+                        <input type="text" name="lname" class="form-control">
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label class="w-100">
+                    <strong>Email</strong>
+                    <br>
+
+                    <input type="email" name="email" id="email" class="form-control">
+                </label>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label class="w-100">
+                        <strong>Password</strong>
+                        <br>
+
+                        <input type="password" name="password" id="password" class="form-control">
+                    </label>
+                </div>
+                <div class="col-6">
+                    <label class="w-100">
+                        <strong>Confirmation</strong>
+                        <br>
+
+                        <input type="password" name="confirmation" id="confirmation" class="form-control">
+                    </label>
+                </div>
+            </div>
+
+            <input class="btn btn-primary text-uppercase w-100" type="submit" value="Create Account">
+        </form>
+
+    </div>
 
 <!-- Bootstrap script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
