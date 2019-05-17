@@ -29,4 +29,10 @@ $f3->route('GET /', function() {
     echo $view->render('views/landing.html');
 });
 
+$f3->route('GET|POST /registration', function() {
+    // Display a view
+    $view = new Template();
+    echo $view->render('views/register.html');
+});
+
 $f3->run();
