@@ -72,8 +72,4 @@ class Expense
     {
         $this->_amount = $amount;
     }
-
-    public function expenseCalc(){
-
-    }
 }
