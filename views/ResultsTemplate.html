@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<h3>Results</h3>
+<div name="pay">
+    <!--Determine what type of pay we need to display-->
+    <check if="{{ @isHourly }}">
+        <true>
+            <!--Hours-->
+            <p>{{@hours}}</p>
+            <!--Wage-->
+            <p>{{@wage}}</p>
+            <!--Total-->
+            <p>{{@total}}</p>
+            <!--Post-Tax Total-->
+            <p>{{@postTax}}</p>
+        </true>
+        <false>
+            <check if="{{ @isSalary}}">
+                <true>
+                    <!--Total-->
+                    <p>{{@total}}</p>
+                    <!--Post-Tax Total-->
+                    <p>{{@postTax}}</p>
+                </true>
+                <false>
+                    <check if=" @isManual">
+                        <true>
+                            <!--Total-->
+                            <p>{{@total}}</p>
+                        </true>
+                        <false>
+                            <!--ERROR-->
+                            <p>An error has occurred when calculating your pay</p>
+                        </false>
+                    </check>
+                </false>
+            </check>
+        </false>
+    </check>
+</div>
+<div name="expenses">
+    <p>Expenses:</p>
+    <!--Loop over and display each expense-->
+    <repeat group="{{@results->getExpenses()}}" value="{{@value}}" >
+        <p>-{{@value->getName()}}({{@value->getAmount()}}): ${{@results->}}</p>
+    </repeat>
+</div>
+<div name="remaining">
+    <!--Display the amount remaining-->
+    <p>{{ @remaining }}</p>
+</div>
+</body>
+</html>

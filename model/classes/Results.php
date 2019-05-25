@@ -10,19 +10,67 @@ class Results
 {
     private $_pay;
     private $_expenses;
+    private $_total;
 
     /**
      * Results constructor.
      * @param $_pay
      * @param $_expenses
      */
-    public function __construct($_pay, $_expenses)
+    public function __construct($_pay, array $_expenses)
     {
         $this->_pay = $_pay;
         $this->_expenses = $_expenses;
+        $this->_total = $_pay;
     }
 
-    public function toHTML(){
-
+    /**
+     * @return mixed
+     */
+    public function getPay()
+    {
+        return $this->_pay;
     }
+
+    /**
+     * @param mixed $pay
+     */
+    public function setPay($pay)
+    {
+        $this->_pay = $pay;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExpenses()
+    {
+        return $this->_expenses;
+    }
+
+    /**
+     * @param array $expenses
+     */
+    public function setExpenses($expenses)
+    {
+        $this->_expenses = $expenses;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotal()
+    {
+        return $this->_total;
+    }
+
+    /**
+     * @param int $total
+     */
+    public function setTotal($total)
+    {
+        $this->_total = $total;
+    }
+
+
 }
