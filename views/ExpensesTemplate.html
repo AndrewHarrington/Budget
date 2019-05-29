@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenses</title>
+</head>
+<body>
+    <form action="" method="POST">
+
+        <!--Header-->
+        <h3>Expenses</h3>
+
+        <!--Name-->
+        <input type="text" name="name">
+
+        <!--Type-->
+        <label class="font-weight-bold d-block col-">Expense Type</label>
+        <div class="form-check form-check-inline" id="radio-button">
+            <input class="form-check-input" type="radio" name="type" id="percent" value="percent" checked>
+            <label class="form-check-label" for="percent">
+                Percentage
+            </label>
+        </div>
+        <div class="form-check form-check-inline" id="gender">
+            <input class="form-check-input" type="radio" name="type" id="cash" value="cash">
+            <label class="form-check-label" for="cash">
+                Cash Amount
+            </label>
+        </div>
+
+        <!--Value-->
+        <p>How much is being taken off? (X.xx% or X.xx) <input type="text" name="to-take" id="to-take"></p>
+        <!--Buttons-->
+        <button id="add">Add New Expense</button>
+        <button type="submit" id="finished">Finished</button>
+    </form>
+
+    <!--List of Expenses-->
+    <!--TBD-->
+</body>
+</html>
