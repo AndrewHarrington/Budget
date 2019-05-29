@@ -7,52 +7,60 @@
 <body>
 <h3>Results</h3>
 <div name="pay">
-    <!--Determine what type of pay we need to display-->
-    <check if="{{ @isHourly }}">
-        <true>
-            <!--Hours-->
-            <p>{{@hours}}</p>
-            <!--Wage-->
-            <p>{{@wage}}</p>
-            <!--Total-->
-            <p>{{@total}}</p>
-            <!--Post-Tax Total-->
-            <p>{{@postTax}}</p>
-        </true>
-        <false>
-            <check if="{{ @isSalary}}">
-                <true>
-                    <!--Total-->
-                    <p>{{@total}}</p>
-                    <!--Post-Tax Total-->
-                    <p>{{@postTax}}</p>
-                </true>
-                <false>
-                    <check if=" @isManual">
-                        <true>
-                            <!--Total-->
-                            <p>{{@total}}</p>
-                        </true>
-                        <false>
-                            <!--ERROR-->
-                            <p>An error has occurred when calculating your pay</p>
-                        </false>
-                    </check>
-                </false>
-            </check>
-        </false>
+    <check if="{{ @payIsSet }}">
+        <!--Determine what type of pay we need to display-->
+        <check if="{{ @isHourly }}">
+            <true>
+                <!--Hours-->
+                <p>{{@hours}}</p>
+                <!--Wage-->
+                <p>{{@wage}}</p>
+                <!--Total-->
+                <p>{{@total}}</p>
+                <!--Post-Tax Total-->
+                <p>{{@postTax}}</p>
+            </true>
+            <false>
+                <check if="{{ @isSalary }}">
+                    <true>
+                        <!--Total-->
+                        <p>{{@total}}</p>
+                        <!--Post-Tax Total-->
+                        <p>{{@postTax}}</p>
+                    </true>
+                    <false>
+                        <check if=" @isManual">
+                            <true>
+                                <!--Total-->
+                                <p>{{@total}}</p>
+                            </true>
+                            <false>
+                                <!--ERROR-->
+                                <p>An error has occurred when calculating your pay</p>
+                            </false>
+                        </check>
+                    </false>
+                </check>
+            </false>
+        </check>
     </check>
 </div>
 <div name="expenses">
-    <p>Expenses:</p>
-    <!--Loop over and display each expense-->
-    <repeat group="{{@results->getExpenses()}}" value="{{@value}}" >
-        <p>-{{@value->getName()}}({{@value->getAmount()}}): ${{@results->}}</p>
-    </repeat>
+    <check if="{{ @expenseIsSet }}">
+        <p>Expenses:</p>
+        <!--Loop over and display each expense-->
+        <repeat group="{{@results->getExpenses()}}" value="{{@value}}" >
+            <!--"Name(Amount): new total"-->
+            <p>-{{@value->getName()}}({{@value->getAmount()}}):
+                ${{@results->setTotal(@results->getTotal()-@results->getAmount())}}</p>
+        </repeat>
+    </check>
 </div>
 <div name="remaining">
-    <!--Display the amount remaining-->
-    <p>{{ @remaining }}</p>
+    <check if="{{ @remainingIsSet }}">
+        <!--Display the amount remaining-->
+        <p>{{ @remaining }}</p>
+    </check>
 </div>
 </body>
 </html>
