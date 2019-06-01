@@ -29,7 +29,27 @@ $f3->route('GET /', function() {
     echo $view->render('views/landing.html');
 });
 
-$f3->route('GET|POST /registration', function() {
+$f3->route('GET|POST /registration', function($f3) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // get value from form
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $email = $_POST['email'];
+
+        // add to f3 hive
+        $f3->set('first', $fname);
+        $f3->set('last', $lname);
+        $f3->set('age', $email);
+
+        // Validate
+        if(validRegistration()) {
+            // TODO: Add where to reroute
+//            $f3->reroute('/');
+        }
+    }
+
+
+
     // Display a view
     $view = new Template();
     echo $view->render('views/register.html');
