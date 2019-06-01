@@ -37,9 +37,9 @@ $f3->route('GET|POST /registration', function($f3) {
         $email = $_POST['email'];
 
         // add to f3 hive
-        $f3->set('first', $fname);
-        $f3->set('last', $lname);
-        $f3->set('age', $email);
+        $f3->set('fname', $fname);
+        $f3->set('lname', $lname);
+        $f3->set('email', $email);
 
         // Validate
         if(validRegistration()) {
@@ -47,8 +47,6 @@ $f3->route('GET|POST /registration', function($f3) {
 //            $f3->reroute('/');
         }
     }
-
-
 
     // Display a view
     $view = new Template();
