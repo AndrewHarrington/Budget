@@ -7,6 +7,9 @@
 <body>
     <form action="" method="POST">
 
+        <!--TODO: Store the UUID-->
+        <input type="hidden" id="uuid" value="">
+
         <!--Header-->
         <h3>Expenses</h3>
 
@@ -29,13 +32,16 @@
         </div>
 
         <!--Value-->
-        <p>How much is being taken off? (X.xx% or X.xx) <input type="text" name="to-take" id="to-take"></p>
+        <p>How much is being taken off? (X.xx% or X.xx) <input type="text" name="amount" id="amount"></p>
         <!--Buttons-->
         <button id="add">Add New Expense</button>
         <button type="submit" id="finished">Finished</button>
     </form>
 
     <!--List of Expenses-->
-    <!--TBD-->
+    <!--AJAX call-->
+    <div id="expense-list"></div>
 </body>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="model/javascript/expenses.js"></script>
 </html>

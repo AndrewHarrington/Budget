@@ -1,5 +1,7 @@
-$("#expense-list").load("model/ajax-expenses.php", {uuid: $("#uuid").val()});
-//reload the list when a new expense is added
+$("#expense-list").load("model/get-expenses.php", {uuid: $("#uuid").val()});
 $("#add").on('click', function(){
-    $("#expense-list").load("model/ajax-expenses.php", {uuid: $("#uuid").val()});
+    //TODO: update the expense list
+
+    //get the new expense list
+    $("#expense-list").load("model/get-expenses.php", {uuid: $("#uuid").val()});
 });
