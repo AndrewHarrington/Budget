@@ -21,6 +21,12 @@ $statement->bindParam(':uuid', $uuid, PDO::PARAM_STR);
 
 $statement->execute();
 
-$val = $statement->fetch(PDO::FETCH_ASSOC);
+$val = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 //show each li with proper values
+
+//start list
+echo "<ol id='list'>";
+
+//end list
+echo "</ol>";
