@@ -23,6 +23,11 @@ function validRegistration() {
         $valid = false;
     }
 
+    if($f3->get('password') != $f3->get('confirmation')) {
+        $f3->set("errors['confirmation']", "Confirmation does not match password");
+        $valid = false;
+    }
+
     return $valid;
 }
 
