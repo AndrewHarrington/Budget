@@ -18,6 +18,11 @@ function validRegistration() {
         $valid = false;
     }
 
+    if(strlen($f3->get('password') < 8)) {
+        $f3->set("errors['password']", "Please enter a password longer than 8 characters");
+        $valid = false;
+    }
+
     return $valid;
 }
 
