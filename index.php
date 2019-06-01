@@ -7,6 +7,7 @@ session_start();
 
 // Require autoload
 require_once "vendor/autoload.php";
+require  'model/validation.php';
 
 // Create an instance of the Base class
 $f3 = Base::instance();
@@ -30,16 +31,20 @@ $f3->route('GET /', function() {
 });
 
 $f3->route('GET|POST /registration', function($f3) {
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(!empty($_POST)) {
         // get value from form
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmation = $_POST['confirmation'];
 
         // add to f3 hive
         $f3->set('fname', $fname);
         $f3->set('lname', $lname);
         $f3->set('email', $email);
+        $f3->set('password', $password);
+        $f3->set('confirmation', $confirmation);
 
         // Validate
         if(validRegistration()) {
