@@ -8,6 +8,11 @@ session_start();
 // Require autoload
 require_once "vendor/autoload.php";
 require  'model/validation.php';
+// TODO: input your database here
+//require '/home2/slegreen/config.php';
+
+
+
 
 // Create an instance of the Base class
 $f3 = Base::instance();
@@ -48,6 +53,30 @@ $f3->route('GET|POST /registration', function($f3) {
 
         // Validate
         if(validRegistration()) {
+            try {
+                // Instantiate a database object
+                $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+//                echo 'Connected to database';
+            }
+            catch(PDOException $e) {
+                echo $e->getMessage();
+            }
+            //Define the query
+            $sql = "INSERT INTO users(first_name, last_name, email, pass)
+                    VALUE(:first_name, :last_name, :email, :pass)";
+
+            // Prepare the statement
+            $statement = $dbh->prepare($sql);
+
+            // Bind the parameter
+            $statement->bindParam(':first_name', $fname, PDO::PARAM_STR);
+            $statement->bindParam(':last_name', $lname, PDO::PARAM_STR);
+            $statement->bindParam(':email', $email, PDO::PARAM_STR);
+            $statement->bindParam(':pass', $password, PDO::PARAM_STR);
+
+            // Execute
+            $statement->execute();
+
             // TODO: Add where to reroute
 //            $f3->reroute('/');
         }
