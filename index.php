@@ -104,12 +104,21 @@ $f3->route('GET|POST /pay', function ($f3){
     echo $view->render('views/PayTemplate.html');
 });
 
-$f3->route('GET|POST /expenses', function(){
+$f3->route('GET|POST /expenses', function($f3){
 
+    //TODO: Validation
+    //TODO: Inline Errors
+    //TODO: Database updates
+
+    // Display a view
+    $view = new Template();
+    echo $view->render('views/ExpensesTemplate.html');
 });
 
-$f3->route('GET|POST /results', function(){
-
+$f3->route('GET|POST /results', function($f3){
+    // Display a view
+    $view = new Template();
+    echo $view->render('views/ResultsTemplate.html');
 });
 
 $f3->run();
