@@ -21,9 +21,9 @@ $("#pay-type").selectmenu({
 function hourly(){
     $("#type").val("hor");
     $("#response").html('<p>' +
-        'Hourly Wage: <input type="text" id="wage"><br>' +
-        'Hours To Be Paid For: <input type="text" id="hours"><br>' +
-        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax"><br>' +
+        'Hourly Wage: <input type="text" id="wage" name="wage"><br>' +
+        'Hours To Be Paid For: <input type="text" id="hours" name="hours"><br>' +
+        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
     $("#submit").on("click", hourCalc);
@@ -33,8 +33,8 @@ function hourly(){
 function monthly(){
     $("#type").val("mon");
     $("#response").html('<p>' +
-        'Monthly Salary: <input type="text" id="pay"><br>' +
-        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax"><br>' +
+        'Monthly Salary: <input type="text" id="pay" name="pay"><br>' +
+        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
     $("#submit").on("click", monthCalc);
@@ -44,7 +44,7 @@ function monthly(){
 function manual(){
     $("#type").val("man");
     $("#response").html('<p>' +
-        'Cash Recieved: <input type="text" id="pay"><br>' +
+        'Cash Recieved: <input type="text" id="pay" name="pay"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
     $("#submit").on("click", manCalc);
