@@ -9,7 +9,7 @@ function validRegistration() {
     }
 
     if(!validName($f3->get('lname'))) {
-        $f3->set("errors['fname']", "Please enter a valid last name");
+        $f3->set("errors['lname']", "Please enter a valid last name");
         $valid = false;
     }
 
