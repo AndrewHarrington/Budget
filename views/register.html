@@ -16,6 +16,37 @@
         <hr>
 
         <form action="#" method="post">
+            <!-- Validate first name -->
+            <check if="{{ isset(@errors.fname)}}">
+                <div class="alert alert-danger" role="alert">
+                    {{@errors.fname}}
+                </div>
+            </check>
+            <!-- Validate last name -->
+            <check if="{{ isset(@errors.lname)}}">
+                <div class="alert alert-danger" role="alert">
+                    {{@errors.lname}}
+                </div>
+            </check>
+            <!-- Validate email-->
+            <check if="{{ isset(@errors.email)}}">
+                <div class="alert alert-danger" role="alert">
+                    {{@errors.email}}
+                </div>
+            </check>
+            <!-- Validate password-->
+            <check if="{{ isset(@errors.password)}}">
+                <div class="alert alert-danger" role="alert">
+                    {{@errors.password}}
+                </div>
+            </check>
+            <!-- Validate email-->
+            <check if="{{ isset(@errors.confirmation)}}">
+                <div class="alert alert-danger" role="alert">
+                    {{@errors.confirmation}}
+                </div>
+            </check>
+
             <!-- Name input row-->
             <div class="row">
                 <!-- First name input column -->
@@ -24,7 +55,7 @@
                         <strong>First Name</strong>
                         <br>
 
-                        <input type="text" name="fname" class="form-control">
+                        <input type="text" name="fname" value="{{ @fname }}" class="form-control">
                     </label>
                 </div>  <!-- End of first name input column -->
 
@@ -34,7 +65,7 @@
                         <strong>Last Name</strong>
                         <br>
 
-                        <input type="text" name="lname" class="form-control">
+                        <input type="text" name="lname" value="{{ @lname }}" class="form-control">
                     </label>
                 </div>  <!-- End of last name input column -->
             </div>  <!-- End of name input row -->
@@ -45,7 +76,7 @@
                     <strong>Email</strong>
                     <br>
 
-                    <input type="email" name="email" id="email" class="form-control">
+                    <input type="email" name="email" value="{{ @email }}" id="email" class="form-control">
                 </label>
             </div>  <!-- End of email input row -->
 
