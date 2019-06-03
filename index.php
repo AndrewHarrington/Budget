@@ -76,8 +76,20 @@ $f3->route('GET|POST /registration', function($f3) {
             // Execute
             $statement->execute();
 
-            // TODO: Add where to reroute
-//            $f3->reroute('/');
+            //get the new user id
+            $identity = "SELECT @@identity";
+
+            $id = $dbh->prepare($identity);
+
+            $id->execute();
+
+            $id = $id->fetch(PDO::FETCH_ASSOC);
+
+            $id = $id['@@identity'];
+
+            $_SESSION['uuid'] = $id;
+
+            $f3->reroute('/pay');
         }
     }
 
