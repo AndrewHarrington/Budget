@@ -8,11 +8,10 @@ session_start();
 // Require autoload
 require_once "vendor/autoload.php";
 require  'model/validation.php';
-// TODO: input your database here
-//require '/home2/slegreen/config.php';
 
-
-
+//universal database connection
+$user = $_SERVER['USER'];
+require_once("/home/$user/budget-db-connect.php");
 
 // Create an instance of the Base class
 $f3 = Base::instance();
