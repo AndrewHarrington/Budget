@@ -1,17 +1,18 @@
 <?php
+
 //database connection
 $user = $_SERVER['USER'];
 require_once("/home/$user/budget-db-connect.php");
 
 // Make the connection
 try {
-    $dbc = new PDO(DSN, DB_USER, DB_PASSWORD);
+    $dbc = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 }catch (PDOException $ex){
     echo "FATAL FLAW FOUND<br>$ex<br>";
     return;
 }
 
-$query = 'INSERT INTO expenses("UUID", "name", "type", "amount") VALUES(:uuid, :name, :type, :amount)';
+$query = 'INSERT INTO expenses(uuid, name, type, value) VALUES (:uuid, :name, :type, :amount)';
 
 $uuid = $_POST['uuid'];
 $name = $_POST['name'];
@@ -27,4 +28,5 @@ $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
 
 $statement->execute();
 
-$val = $statement->fetchAll(PDO::FETCH_ASSOC);
+$statement->fetch();
+

@@ -19,33 +19,30 @@ $("#pay-type").selectmenu({
 
 //when the "hourly" option is selected
 function hourly(){
-    $("#type").val("hor");
+    $("input[id=type]").val('hor');
     $("#response").html('<p>' +
         'Hourly Wage: <input type="text" id="wage" name="wage"><br>' +
         'Hours To Be Paid For: <input type="text" id="hours" name="hours"><br>' +
         'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
-    $("#submit").on("click", hourCalc);
 }
 
 //when the "monthly" option is selected
 function monthly(){
-    $("#type").val("mon");
+    $("input[id=type]").val('mon');
     $("#response").html('<p>' +
         'Monthly Salary: <input type="text" id="pay" name="pay"><br>' +
         'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
-    $("#submit").on("click", monthCalc);
 }
 
 //when the "manual" option is selected
 function manual(){
-    $("#type").val("man");
+    $("input[id=type]").val('man');
     $("#response").html('<p>' +
         'Cash Recieved: <input type="text" id="pay" name="pay"><br>' +
         '<button type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
-    $("#submit").on("click", manCalc);
 }

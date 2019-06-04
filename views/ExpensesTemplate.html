@@ -6,20 +6,26 @@
 </head>
 <body>
     <form action="" method="POST">
-
-        <!--TODO: Store the UUID-->
-        <input type="hidden" id="uuid" value="">
+        <check if="{{ isset(@SESSION.uuid) }}">
+            <true>
+                <input type="hidden" id="uuid" value="{{ @SESSION.uuid }}">
+            </true>
+            <false>
+                <input type="hidden" id="uuid" value="-1">
+            </false>
+        </check>
 
         <!--Header-->
         <h3>Expenses</h3>
 
         <!--Name-->
-        <input type="text" name="name">
-
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+        <br><br>
         <!--Type-->
         <label class="font-weight-bold d-block col-">Expense Type</label>
         <div class="form-check form-check-inline" id="radio-button">
-            <input class="form-check-input" type="radio" name="type" id="percent" value="percent" checked>
+            <input class="form-check-input" type="radio" name="type" id="percent" value="perc" checked>
             <label class="form-check-label" for="percent">
                 Percentage
             </label>
