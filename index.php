@@ -3,11 +3,11 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
-
 // Require autoload
 require_once "vendor/autoload.php";
 require  'model/validation.php';
+
+session_start();
 
 //universal database connection
 $user = $_SERVER['USER'];
@@ -35,20 +35,17 @@ $f3->route('GET /', function() {
 });
 
 $f3->route('GET|POST /registration', function($f3) {
-    if(!empty($_POST)) {
+
+    // initialize values value from form
+    $fname = $lname = $email = $password = $confirmation = '';
+
+    if($_SERVER['REQUEST_METHOD'] == "POST") {
         // get value from form
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmation = $_POST['confirmation'];
-
-        // add to f3 hive
-        $f3->set('fname', $fname);
-        $f3->set('lname', $lname);
-        $f3->set('email', $email);
-        $f3->set('password', $password);
-        $f3->set('confirmation', $confirmation);
 
         // Validate
         if(validRegistration()) {
@@ -93,6 +90,13 @@ $f3->route('GET|POST /registration', function($f3) {
         }
     }
 
+    // add to f3 hive
+    $f3->set('fname', $fname);
+    $f3->set('lname', $lname);
+    $f3->set('email', $email);
+    $f3->set('password', $password);
+    $f3->set('confirmation', $confirmation);
+
     // Display a view
     $view = new Template();
     echo $view->render('views/register.html');
@@ -106,7 +110,7 @@ $f3->route('GET|POST /pay', function ($f3){
         //validation
         $valid = true;
         $payOBJ = null;
-
+        print_r($_POST);
         //determine the type of pay that we received
         switch ($_POST['type']){
             //if hourly
@@ -117,7 +121,7 @@ $f3->route('GET|POST /pay', function ($f3){
                 $tax = preg_replace("/[^0-9.]/", "", $_POST['tax']);
 
                 //check validity
-                if(!validNum($wage) || !validNum($hours) || !validNum($tax)){
+                if(!validNumber($wage) || !validNumber($hours) || !validNumber($tax)){
                     $valid = false;
                 }
                 else{
@@ -130,7 +134,7 @@ $f3->route('GET|POST /pay', function ($f3){
                 $pay = preg_replace("/[^0-9.]/", "", $_POST['pay']);
                 $tax = preg_replace("/[^0-9.]/", "", $_POST['tax']);
 
-                if(!validNum($pay) || !validNum($tax)){
+                if(!validNumber($pay) || !validNumber($tax)){
                     $valid = false;
                 }
                 else{
@@ -140,7 +144,7 @@ $f3->route('GET|POST /pay', function ($f3){
             //if manual
             case 'man':
                 $pay = preg_replace("/[^0-9.]/", "", $_POST['pay']);
-                if(!validNum($pay)){
+                if(!validNumber($pay)){
                     $valid = false;
                 }
                 else{
