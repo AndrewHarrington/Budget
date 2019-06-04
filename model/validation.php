@@ -18,7 +18,7 @@ function validRegistration() {
         $valid = false;
     }
 
-    if(strlen($f3->get('password') < 8)) {
+    if(strlen($f3->get('password')) < 8) {
         $f3->set("errors['password']", "Please enter a password longer than 8 characters");
         $valid = false;
     }
@@ -27,8 +27,11 @@ function validRegistration() {
         $f3->set("errors['confirmation']", "Confirmation does not match password");
         $valid = false;
     }
-
     return $valid;
+}
+
+function validExpense(Expense $expense){
+    return validName($expense->getName()) && validNum($expense->getAmount());
 }
 
 // Name validation check for string
