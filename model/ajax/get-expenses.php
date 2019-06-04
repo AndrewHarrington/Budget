@@ -11,7 +11,7 @@ try {
     return;
 }
 
-$query = 'SELECT name, type, value FROM expenses WHERE UUID = :uuid';
+$query = 'SELECT expenseID, name, type, value FROM expenses WHERE UUID = :uuid';
 
 $uuid = $_POST['uuid'];
 
@@ -31,13 +31,16 @@ $header = "<ol id='list'>";
 $list = '';
 //loop
 foreach ($rows as $key => $value){
+    //id
+    $id = $value['expenseID'];
     //name
     $name = $value['name'];
     //type
     $type = $value['type'];
     //value
     $val = $value['value'];
-    $list .= "<li class='ex'><p>$name  <button class='del'>X</button></p>
+
+    $list .= "<li class='ex'><p>$name  <button class='del' id='$id'>X</button></p>
             <input type='hidden' value='$type' id='type'>
             <input type='hidden' value='$val' id='value'>
             </li>";
