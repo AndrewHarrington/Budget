@@ -180,11 +180,6 @@ $f3->route('GET|POST /pay', function ($f3){
 });
 
 $f3->route('GET|POST /expenses', function($f3){
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $f3->reroute('/results');
-    }
-
     // Display a view
     $view = new Template();
     echo $view->render('views/ExpensesTemplate.html');

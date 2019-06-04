@@ -14,6 +14,10 @@ $("#add").on('click', function(){
     loadExpenses();
 });
 
+$("#finished").on('click', function(){
+    window.location.assign('/328/budget/results');
+});
+
 //functions
 function viewItem(element) {
     //TODO: Make this function display the data of the contained item and allow for editing
