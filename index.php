@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once "vendor/autoload.php";
 require  'model/validation.php';
 
+//start the session
 session_start();
 
 //universal database connection
@@ -36,8 +37,15 @@ $f3->route('GET /', function() {
 
 $f3->route('GET|POST /registration', function($f3) {
 
-    // initialize values value from form
+    // initialize values from form
     $fname = $lname = $email = $password = $confirmation = '';
+
+    // add to f3 hive
+    $f3->set('fname', $fname);
+    $f3->set('lname', $lname);
+    $f3->set('email', $email);
+    $f3->set('password', $password);
+    $f3->set('confirmation', $confirmation);
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
         // get value from form
@@ -46,6 +54,13 @@ $f3->route('GET|POST /registration', function($f3) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmation = $_POST['confirmation'];
+
+        // add to f3 hive
+        $f3->set('fname', $fname);
+        $f3->set('lname', $lname);
+        $f3->set('email', $email);
+        $f3->set('password', $password);
+        $f3->set('confirmation', $confirmation);
 
         // Validate
         if(validRegistration()) {
@@ -89,13 +104,6 @@ $f3->route('GET|POST /registration', function($f3) {
             $f3->reroute('/pay');
         }
     }
-
-    // add to f3 hive
-    $f3->set('fname', $fname);
-    $f3->set('lname', $lname);
-    $f3->set('email', $email);
-    $f3->set('password', $password);
-    $f3->set('confirmation', $confirmation);
 
     // Display a view
     $view = new Template();
@@ -173,9 +181,9 @@ $f3->route('GET|POST /pay', function ($f3){
 
 $f3->route('GET|POST /expenses', function($f3){
 
-    //TODO: Validation
-    //TODO: Inline Errors
-    //TODO: Database updates
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $f3->reroute('/results');
+    }
 
     // Display a view
     $view = new Template();
