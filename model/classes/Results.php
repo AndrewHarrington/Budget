@@ -15,7 +15,7 @@ class Results
     /**
      * Results constructor.
      * @param $_pay
-     * @param $_expenses
+     * @param $_expenses - Array of Expense objects
      */
     public function __construct($_pay, array $_expenses)
     {
