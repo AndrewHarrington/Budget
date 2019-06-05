@@ -29,7 +29,17 @@ set_error_handler(function($code,$text) use($f3) {
 $f3->set('DEBUG', 3);
 
 // Define a default route
-$f3->route('GET /', function() {
+$f3->route('GET|POST /', function($f3) {
+
+    //login
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $login = validLogin($_POST['email'], $_POST['password']);
+        if($login != false){
+            $f3->set('uuid', $login);
+            $f3->reroute('/pay');
+        }
+    }
+
     // Display a view
     $view = new Template();
     echo $view->render('views/landing.html');
