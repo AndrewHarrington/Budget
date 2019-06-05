@@ -1,27 +1,9 @@
 <?php
-//database connection
-$user = $_SERVER['USER'];
-require_once("/home/$user/budget-db-connect.php");
+require  'model/functions.php';
 
-// Make the connection
-try {
-    $dbc = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-}catch (PDOException $ex){
-    echo "FATAL FLAW FOUND<br>$ex<br>";
-    return;
-}
-
-$query = 'SELECT expenseID, name, type, value FROM expenses WHERE UUID = :uuid';
-
+//get all of the expenses as and associative array
 $uuid = $_POST['uuid'];
-
-$statement = $dbc->prepare($query);
-
-$statement->bindParam(':uuid', $uuid, PDO::PARAM_STR);
-
-$statement->execute();
-
-$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+$rows = getExpenses($uuid);
 
 //show each li with proper values
 
