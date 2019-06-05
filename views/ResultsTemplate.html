@@ -7,9 +7,9 @@
 <body>
 <h3>Results</h3>
 <div name="pay">
-    <check if="{{ @payIsSet }}">
+    <check if="{{ isset(@payType) }}">
         <!--Determine what type of pay we need to display-->
-        <check if="{{ @isHourly }}">
+        <check if="{{ @payType == 'hourly' }}">
             <true>
                 <!--Hours-->
                 <p>{{@hours}}</p>
@@ -21,7 +21,7 @@
                 <p>{{@postTax}}</p>
             </true>
             <false>
-                <check if="{{ @isSalary }}">
+                <check if="{{ @payType == 'salary' }}">
                     <true>
                         <!--Total-->
                         <p>{{@total}}</p>
@@ -29,7 +29,7 @@
                         <p>{{@postTax}}</p>
                     </true>
                     <false>
-                        <check if=" @isManual">
+                        <check if="{{ @payType == 'manual' }}">
                             <true>
                                 <!--Total-->
                                 <p>{{@total}}</p>
@@ -46,21 +46,17 @@
     </check>
 </div>
 <div name="expenses">
-    <check if="{{ @expenseIsSet }}">
-        <p>Expenses:</p>
-        <!--Loop over and display each expense-->
-        <repeat group="{{@results->getExpenses()}}" value="{{@value}}" >
-            <!--"Name(Amount): new total"-->
-            <p>-{{@value->getName()}}({{@value->getAmount()}}):
-                ${{@results->setTotal(@results->getTotal()-@results->getAmount())}}</p>
-        </repeat>
-    </check>
+    <p>Expenses:</p>
+    <!--Loop over and display each expense-->
+    <repeat group="{{@results->getExpenses()}}" value="{{@value}}" >
+        <!--"Name(Amount): new total"-->
+        <p>-{{@value->getName()}}({{@value->getAmount()}}):
+            ${{@results->setTotal(@results->getTotal()-@results->getAmount())}}</p>
+    </repeat>
 </div>
 <div name="remaining">
-    <check if="{{ @remainingIsSet }}">
-        <!--Display the amount remaining-->
-        <p>{{ @remaining }}</p>
-    </check>
+    <!--Display the amount remaining-->
+    <p>{{ @results->getTotal() }}</p>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 // Require autoload
 require_once "vendor/autoload.php";
-require  'model/validation.php';
+require  'model/functions.php';
 
 //start the session
 session_start();
@@ -67,7 +67,6 @@ $f3->route('GET|POST /registration', function($f3) {
             try {
                 // Instantiate a database object
                 $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-//                echo 'Connected to database';
             }
             catch(PDOException $e) {
                 echo $e->getMessage();
@@ -99,7 +98,7 @@ $f3->route('GET|POST /registration', function($f3) {
 
             $id = $id['@@identity'];
 
-            $_SESSION['uuid'] = $id;
+            $f3->set('uuid', $id);
 
             $f3->reroute('/pay');
         }
@@ -135,6 +134,7 @@ $f3->route('GET|POST /pay', function ($f3){
                 else{
                     //create the object
                     $payOBJ = new Hourly($hours, $wage, $tax);
+                    $f3->set('payType', 'hourly');
                 }
                 break;
             //if monthly
@@ -147,6 +147,7 @@ $f3->route('GET|POST /pay', function ($f3){
                 }
                 else{
                     $payOBJ = new Salary($pay, $tax);
+                    $f3->set('payType', 'salary');
                 }
                 break;
             //if manual
@@ -157,19 +158,24 @@ $f3->route('GET|POST /pay', function ($f3){
                 }
                 else{
                     $payOBJ = new Manual($pay);
+                    $f3->set('payType', 'manual');
                 }
                 break;
             default:
                 //bad data
                 $valid = false;
                 //redirect
-                $f3->reroute('/pay');
+                $f3->reroute('/');
         }
 
         //storage
         $f3->set('pay', $payOBJ);
 
         if($valid){
+            //create and store the Results object
+            $results = new Results($payOBJ, array());
+            $f3->set('results', $results);
+
             //reroute
             $f3->reroute('/expenses');
         }
@@ -186,6 +192,26 @@ $f3->route('GET|POST /expenses', function($f3){
 });
 
 $f3->route('GET|POST /results', function($f3){
+    //grab and store the expenses
+    $expenses = array();
+    $uuid = $f3->get('uuid');
+    $rows = getExpenses($uuid);
+    //loop
+    foreach ($rows as $key => $value){
+        //name
+        $name = $value['name'];
+        //type
+        $type = $value['type'];
+        //value
+        $val = $value['value'];
+
+        array_push($expenses, new Expense($name, $type, $val));
+    }
+
+    //add the expenses to the Results object
+    $results = $f3->get('results');
+    $results->setExpenses($expenses);
+
     // Display a view
     $view = new Template();
     echo $view->render('views/ResultsTemplate.html');

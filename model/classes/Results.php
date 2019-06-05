@@ -65,12 +65,12 @@ class Results
     }
 
     /**
-     * @param int $total
+     * @param $total
+     * @return mixed
      */
     public function setTotal($total)
     {
         $this->_total = $total;
+        return $this->_total;
     }
-
-
 }
