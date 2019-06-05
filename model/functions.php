@@ -71,4 +71,5 @@ function getExpenses($uuid){
 
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    return $rows;
 }
