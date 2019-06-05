@@ -1,4 +1,7 @@
 <?php
+echo 'HAAAAALLLLLLPPPPPPP';
+require_once('../functions.php');
+require_once ('../../vendor/autoload.php');
 
 //get all the data
 $uuid = $_POST['uuid'];
@@ -16,16 +19,7 @@ if(!validExpense($expense)){
 }
 
 //database connection
-$user = $_SERVER['USER'];
-require_once("/home/$user/budget-db-connect.php");
-
-// Make the connection
-try {
-    $dbc = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-}catch (PDOException $ex){
-    echo "FATAL FLAW FOUND<br>$ex<br>";
-    return;
-}
+$dbc = connectToDatabase();
 
 $query = 'INSERT INTO expenses(uuid, name, type, value) VALUES (:uuid, :name, :type, :amount)';
 
@@ -37,3 +31,12 @@ $statement->bindParam(':type', $type, PDO::PARAM_STR);
 $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
 
 $statement->execute();
+
+$err = $statement->errorInfo();
+
+if(isset($err[2])){
+    echo $err[2];
+}
+else{
+
+}

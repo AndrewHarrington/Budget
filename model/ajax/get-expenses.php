@@ -1,5 +1,6 @@
 <?php
-require  'model/functions.php';
+
+require_once('../functions.php');
 
 //get all of the expenses as and associative array
 $uuid = $_POST['uuid'];

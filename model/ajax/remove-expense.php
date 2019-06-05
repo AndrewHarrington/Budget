@@ -1,16 +1,8 @@
 <?php
+require  '../functions.php';
 
 //database connection
-$user = $_SERVER['USER'];
-require_once("/home/$user/budget-db-connect.php");
-
-// Make the connection
-try {
-    $dbc = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-}catch (PDOException $ex){
-    echo "FATAL FLAW FOUND<br>$ex<br>";
-    return;
-}
+$dbc = connectToDatabase();
 
 $query = 'DELETE FROM expenses WHERE expenseID = :id';
 
