@@ -3,15 +3,12 @@ loadExpenses();
 
 //click events
 $("#add").on('click', function(){
-    //TODO: update the expense list
     var uuid = $("#uuid").val();
     var name = $("#name").val();
     var type = $("input[name='type']:checked").val();
     var amount = $("#amount").val();
 
-    $.post("model/ajax/insert-expense.php", {uuid: uuid, name: name, type: type, amount: amount}, function (results){
-        $("#test").html(results);
-    });
+    $.post("model/ajax/insert-expense.php", {uuid: uuid, name: name, type: type, amount: amount});
     loadExpenses();
 });
 

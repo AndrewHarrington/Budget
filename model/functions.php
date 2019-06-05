@@ -31,12 +31,12 @@ function validRegistration() {
 }
 
 function validExpense(Expense $expense){
-    return validName($expense->getName()) && validNum($expense->getAmount());
+    return (validName($expense->getName()) && validNumber($expense->getAmount()));
 }
 
 // Name validation check for string
 function validName($name) {
-    return isset($name) && $name != "" && ctype_alpha($name);
+    return isset($name) && $name != "" && ctype_alpha(str_replace(' ', '', $name));
 }
 
 // Email validation filter valid email
@@ -73,7 +73,7 @@ function validLogin($email, $pass){
 function getExpenses($uuid){
     $dbc = connectToDatabase();
 
-    $query = 'SELECT expenseID, name, type, value FROM expenses WHERE UUID = :uuid';
+    $query = 'SELECT expenseID, name, type, value FROM expenses WHERE UUID = :uuid ORDER BY expenseID';
 
     $statement = $dbc->prepare($query);
 

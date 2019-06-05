@@ -1,5 +1,4 @@
 <?php
-echo '<p>PLZ SEND HALP</p>';
 require_once ('../../vendor/autoload.php');
 require_once('../functions.php');
 
@@ -15,11 +14,14 @@ $expense = new Expense($name, $type, $amount);
 //validate the expense
 if(!validExpense($expense)){
     //if invalid, return
+    echo "FAIL";
     return;
 }
 
 //database connection
 $dbc = connectToDatabase();
+
+echo '<p>connected to db</p>';
 
 $query = 'INSERT INTO expenses(uuid, name, type, value) VALUES (:uuid, :name, :type, :amount)';
 
