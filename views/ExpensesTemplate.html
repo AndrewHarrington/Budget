@@ -8,7 +8,7 @@
     <form action="" method="POST">
         <check if="{{ isset(@SESSION.uuid) }}">
             <true>
-                <input type="hidden" id="uuid" value="{{ @SESSION.uuid }}">
+                <input type="hidden" id="uuid" value="{{ @uuid }}">
             </true>
             <false>
                 <input type="hidden" id="uuid" value="-1">
