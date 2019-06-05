@@ -1,7 +1,7 @@
 <?php
-echo 'HAAAAALLLLLLPPPPPPP';
-require_once('../functions.php');
+echo '<p>PLZ SEND HALP</p>';
 require_once ('../../vendor/autoload.php');
+require_once('../functions.php');
 
 //get all the data
 $uuid = $_POST['uuid'];
@@ -33,10 +33,3 @@ $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
 $statement->execute();
 
 $err = $statement->errorInfo();
-
-if(isset($err[2])){
-    echo $err[2];
-}
-else{
-
-}

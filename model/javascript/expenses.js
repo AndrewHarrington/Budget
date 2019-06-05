@@ -9,7 +9,7 @@ $("#add").on('click', function(){
     var type = $("input[name='type']:checked").val();
     var amount = $("#amount").val();
 
-    $.post("/model/ajax/insert-expense.php", {uuid: uuid, name: name, type: type, amount: amount}, function (results){
+    $.post("model/ajax/insert-expense.php", {uuid: uuid, name: name, type: type, amount: amount}, function (results){
         $("#test").html(results);
     });
     loadExpenses();
