@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 // Require autoload
 require_once "vendor/autoload.php";
 require  'model/functions.php';
-
 //start the session
 session_start();
 
@@ -35,7 +34,8 @@ $f3->route('GET|POST /', function($f3) {
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $login = validLogin($_POST['email'], $_POST['password']);
         if($login != false){
-            $f3->set('uuid', $login);
+            $_SESSION['uuid'] = $login;
+            $_SESSION['results'] = new Results(0, array());
             $f3->reroute('/pay');
         }
     }
@@ -136,7 +136,7 @@ $f3->route('GET|POST /pay', function ($f3){
                 $wage = preg_replace("/[^0-9.]/", "", $_POST['wage']);
                 $hours = preg_replace("/[^0-9.]/", "", $_POST['hours']);
                 $tax = preg_replace("/[^0-9.]/", "", $_POST['tax']);
-
+                $total = $wage * $hours;
                 //check validity
                 if(!validNumber($wage) || !validNumber($hours) || !validNumber($tax)){
                     $valid = false;
@@ -144,7 +144,11 @@ $f3->route('GET|POST /pay', function ($f3){
                 else{
                     //create the object
                     $payOBJ = new Hourly($hours, $wage, $tax);
-                    $f3->set('payType', 'hourly');
+                    $_SESSION['payType'] = 'hourly';
+                    $f3->set('hours', $hours);
+                    $f3->set('wage', $wage);
+                    $f3->set('total', $total);
+                    $f3->set('postTax', $total-($total * $tax));
                 }
                 break;
             //if monthly
@@ -157,7 +161,9 @@ $f3->route('GET|POST /pay', function ($f3){
                 }
                 else{
                     $payOBJ = new Salary($pay, $tax);
-                    $f3->set('payType', 'salary');
+                    $_SESSION['payType'] = 'salary';
+                    $f3->set('total', $pay);
+                    $f3->set('postTax', $pay-($pay*$tax));
                 }
                 break;
             //if manual
@@ -168,7 +174,8 @@ $f3->route('GET|POST /pay', function ($f3){
                 }
                 else{
                     $payOBJ = new Manual($pay);
-                    $f3->set('payType', 'manual');
+                    $_SESSION['payType'] = 'manual';
+                    $f3->set('total', $pay);
                 }
                 break;
             default:
@@ -182,9 +189,8 @@ $f3->route('GET|POST /pay', function ($f3){
         $f3->set('pay', $payOBJ);
 
         if($valid){
-            //create and store the Results object
-            $results = new Results($payOBJ, array());
-            $f3->set('results', $results);
+            $results = $_SESSION['results'];
+            $results->setPay($payOBJ);
 
             //reroute
             $f3->reroute('/expenses');
@@ -196,6 +202,11 @@ $f3->route('GET|POST /pay', function ($f3){
 });
 
 $f3->route('GET|POST /expenses', function($f3){
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $f3->reroute('/results');
+    }
+
     // Display a view
     $view = new Template();
     echo $view->render('views/ExpensesTemplate.html');
@@ -204,7 +215,7 @@ $f3->route('GET|POST /expenses', function($f3){
 $f3->route('GET|POST /results', function($f3){
     //grab and store the expenses
     $expenses = array();
-    $uuid = $f3->get('uuid');
+    $uuid = $_SESSION['uuid'];
     $rows = getExpenses($uuid);
     //loop
     foreach ($rows as $key => $value){
@@ -219,9 +230,9 @@ $f3->route('GET|POST /results', function($f3){
     }
 
     //add the expenses to the Results object
-    $results = $f3->get('results');
+    $results = $_SESSION['results'];
     $results->setExpenses($expenses);
-
+    print_r($_SESSION);
     // Display a view
     $view = new Template();
     echo $view->render('views/ResultsTemplate.html');
