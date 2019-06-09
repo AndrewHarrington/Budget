@@ -11,7 +11,15 @@ session_start();
 
 //universal database connection
 $user = $_SERVER['USER'];
-require_once("/home/$user/budget-db-connect.php");
+if($user == 'slegreen') {
+    require_once '/home2/slegreen/config.php';
+
+}
+else {
+    require_once("/home/$user/budget-db-connect.php");
+}
+
+
 
 // Create an instance of the Base class
 $f3 = Base::instance();
