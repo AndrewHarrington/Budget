@@ -88,8 +88,18 @@ function getExpenses($uuid){
 
 function connectToDatabase(){
     //database connection
+//    $user = $_SERVER['USER'];
+//    require_once("/home/$user/budget-db-connect.php");
+//    require_once '/home2/slegreen/config.php';
     $user = $_SERVER['USER'];
-    require_once("/home/$user/budget-db-connect.php");
+    if($user == 'slegreen') {
+        require_once '/home2/slegreen/config.php';
+
+    }
+    else {
+        require_once("/home/$user/budget-db-connect.php");
+    }
+
 
 // Make the connection
     try {
