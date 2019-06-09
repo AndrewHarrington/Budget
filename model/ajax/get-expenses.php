@@ -23,7 +23,11 @@ foreach ($rows as $key => $value){
     //value
     $val = $value['value'];
 
-    $list .= "<li class='ex'><p>$name  <button class='del' id='$id'>X</button></p>
+    $list .= "<li class='ex' id='item$id'><p>$name  
+                <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#viewExpense'>
+                    Edit
+                </button>
+                <button class='del btn btn-danger' id='$id'>X</button></p>
             <input type='hidden' value='$type' id='type'>
             <input type='hidden' value='$val' id='value'>
             </li>";
