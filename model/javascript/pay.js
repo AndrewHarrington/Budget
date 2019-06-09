@@ -21,10 +21,10 @@ $("#pay-type").selectmenu({
 function hourly(){
     $("input[id=type]").val('hor');
     $("#response").html('<p>' +
-        'Hourly Wage: <input type="text" id="wage" name="wage"><br>' +
-        'Hours To Be Paid For: <input type="text" id="hours" name="hours"><br>' +
-        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
-        '<button type="submit" id="submit">Submit</button> </p>');
+        '<strong>Hourly Wage:</strong> <input class="form-control" type="text" id="wage" name="wage"><br>' +
+        '<strong>Hours To Be Paid For:</strong> <input class="form-control" type="text" id="hours" name="hours"><br>' +
+        '<strong>Percentage Of Pay Taken For Income Tax:</strong> <input class="form-control" type="text" id="tax" name="tax"><br>' +
+        '<button class="btn btn-primary" type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
 }
 
@@ -32,9 +32,9 @@ function hourly(){
 function monthly(){
     $("input[id=type]").val('mon');
     $("#response").html('<p>' +
-        'Monthly Salary: <input type="text" id="pay" name="pay"><br>' +
-        'Percentage Of Pay Taken For Income Tax: <input type="text" id="tax" name="tax"><br>' +
-        '<button type="submit" id="submit">Submit</button> </p>');
+        '<strong>Monthly Salary:</strong> <input class="form-control" type="text" id="pay" name="pay"><br>' +
+        '<strong>Percentage Of Pay Taken For Income Tax:</strong> <input class="form-control" type="text" id="tax" name="tax"><br>' +
+        '<button class="btn btn-primary" type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
 }
 
@@ -42,7 +42,7 @@ function monthly(){
 function manual(){
     $("input[id=type]").val('man');
     $("#response").html('<p>' +
-        'Cash Recieved: <input type="text" id="pay" name="pay"><br>' +
-        '<button type="submit" id="submit">Submit</button> </p>');
+        '<strong>Cash Recieved:</strong> <input class="form-control" type="text" id="pay" name="pay"><br>' +
+        '<button class="btn btn-primary" type="submit" id="submit">Submit</button> </p>');
     $("#response").show();
 }
