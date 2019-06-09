@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
 <body>
-    <!--Header-->
-    <h3>Pay</h3>
-    <!--ComboBox-->
-    <select name="pay-type" id="pay-type">
-        <option selected="selected">Choose one...</option>
-        <option>Hourly</option>
-        <option>Salary</option>
-        <option>Manual (After Tax)</option>
-    </select>
-    <!--Modular Content (to be written in jQuery)-->
-    <form action="" method="POST">
-        <input type="hidden" id="type" name="type" value="">
-        <div id="response">
-
+    <div class="container shadow-sm p-5 mb-5 mt-2 bg-white rounded w-50">
+        <!--Header-->
+        <h3 class="text-center">Pay</h3>
+        <div class="text-center">
+            <select name="pay-type" id="pay-type">
+                <option selected="selected">Choose one...</option>
+                <option>Hourly</option>
+                <option>Salary</option>
+                <option>Manual (After Tax)</option>
+            </select>
         </div>
-    </form>
+        <!--ComboBox-->
+
+        <!--Modular Content (to be written in jQuery)-->
+        <form action="" method="POST">
+            <input type="hidden" id="type" name="type" value="">
+            <div id="response">
+
+            </div>
+        </form>
+    </div>
+
+
 </body>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <!-- Script -->
