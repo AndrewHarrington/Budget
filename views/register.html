@@ -16,37 +16,6 @@
         <hr>
 
         <form action="#" method="post">
-            <!-- Validate first name -->
-            <check if="{{ isset(@errors.fname)}}">
-                <div class="alert alert-danger" role="alert">
-                    {{@errors.fname}}
-                </div>
-            </check>
-            <!-- Validate last name -->
-            <check if="{{ isset(@errors.lname)}}">
-                <div class="alert alert-danger" role="alert">
-                    {{@errors.lname}}
-                </div>
-            </check>
-            <!-- Validate email-->
-            <check if="{{ isset(@errors.email)}}">
-                <div class="alert alert-danger" role="alert">
-                    {{@errors.email}}
-                </div>
-            </check>
-            <!-- Validate password-->
-            <check if="{{ isset(@errors.password)}}">
-                <div class="alert alert-danger" role="alert">
-                    {{@errors.password}}
-                </div>
-            </check>
-            <!-- Validate email-->
-            <check if="{{ isset(@errors.confirmation)}}">
-                <div class="alert alert-danger" role="alert">
-                    {{@errors.confirmation}}
-                </div>
-            </check>
-
             <!-- Name input row-->
             <div class="row">
                 <!-- First name input column -->
@@ -55,7 +24,13 @@
                         <strong>First Name</strong>
                         <br>
 
-                        <input type="text" name="fname" value="{{ @fname }}" class="form-control">
+                        <input type="text" name="fname"  class="form-control">
+                        <!-- Validate first name -->
+                        <check if="{{ isset(@errors.fname)}}">
+                            <span class="text-danger" role="alert">
+                                {{@errors.fname}}
+                            </span>
+                        </check>
                     </label>
                 </div>  <!-- End of first name input column -->
 
@@ -65,7 +40,13 @@
                         <strong>Last Name</strong>
                         <br>
 
-                        <input type="text" name="lname" value="{{ @lname }}" class="form-control">
+                        <input type="text" name="lname"  class="form-control">
+                        <!-- Validate last name -->
+                        <check if="{{ isset(@errors.lname)}}">
+                            <span class="text-danger" role="alert">
+                                {{@errors.lname}}
+                            </span>
+                        </check>
                     </label>
                 </div>  <!-- End of last name input column -->
             </div>  <!-- End of name input row -->
@@ -76,7 +57,13 @@
                     <strong>Email</strong>
                     <br>
 
-                    <input type="email" name="email" value="{{ @email }}" id="email" class="form-control">
+                    <input type="email" name="email"  id="email" class="form-control">
+                    <!-- Validate email-->
+                    <check if="{{ isset(@errors.email)}}">
+                        <span class="text-danger" role="alert">
+                            {{@errors.email}}
+                        </span>
+                    </check>
                 </label>
             </div>  <!-- End of email input row -->
 
@@ -89,6 +76,12 @@
                         <br>
 
                         <input type="password" name="password" id="password" class="form-control">
+                        <!-- Validate password-->
+                        <check if="{{ isset(@errors.password)}}">
+                            <span class="text-danger" role="alert">
+                                {{@errors.password}}
+                            </span>
+                        </check>
                     </label>
                 </div>  <!-- End of password input column -->
 
@@ -99,6 +92,12 @@
                         <br>
 
                         <input type="password" name="confirmation" id="confirmation" class="form-control">
+                        <!-- Validate email-->
+                        <check if="{{ isset(@errors.confirmation)}}">
+                            <span class="text-danger" role="alert">
+                                {{@errors.confirmation}}
+                            </span>
+                        </check>
                     </label>
                 </div>  <!-- End of password confirmation input column -->
             </div>  <!-- End of password input row -->
