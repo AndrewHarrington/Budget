@@ -4,69 +4,76 @@
     <meta charset="UTF-8">
     <title>Results</title>
 </head>
+
+<!-- Bootstrap CSS-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <body>
-<h2>Results</h2>
-<div name="pay">
-    <h3>Pay:</h3>
-    <check if="{{ isset(@SESSION.payType) }}">
-        <true>
-            <!--Determine what type of pay we need to display-->
-            <check if="{{ @SESSION.payType == 'hourly' }}">
-                <true>
-                    <!--Hours-->
-                    <p>{{@SESSION.hours}}</p>
-                    <!--Wage-->
-                    <p>{{@SESSION.wage}}</p>
-                    <!--Total-->
-                    <p>{{@SESSION.total}}</p>
-                    <!--Post-Tax Total-->
-                    <p>{{@SESSION.postTax}}</p>
-                </true>
-                <false>
-                    <check if="{{ @SESSION.payType == 'salary' }}">
-                        <true>
-                            <!--Total-->
-                            <p>{{@SESSION.total}}</p>
-                            <!--Post-Tax Total-->
-                            <p>{{@SESSION.postTax}}</p>
-                        </true>
-                        <false>
-                            <check if="{{ @SESSION.payType == 'manual' }}">
-                                <true>
-                                    <!--Total-->
-                                    <p>{{@SESSION.total}}</p>
-                                </true>
-                                <false>
-                                    <!--ERROR-->
-                                    <p>An error has occurred when calculating your pay</p>
-                                </false>
-                            </check>
-                        </false>
-                    </check>
-                </false>
-            </check>
-        </true>
-        <false>
-            <p>An Error Has Occurred</p>
-        </false>
-    </check>
-</div>
-<div name="expenses">
-    <h3>Expenses:</h3>
-    <!--Loop over and display each expense-->
-    <ul>
-        <repeat group="{{@SESSION.results->getExpenses()}}" value="{{@value}}" >
-            <!--"Name(Amount): new total"-->
-            <li>{{@value->getName()}}({{@value->getAmount()}}):
-                ${{@SESSION.results->setTotal((@SESSION.results->getTotal())-(@value->getAmount()))}}
-            </li>
-        </repeat>
-    </ul>
-</div>
-<div name="remaining">
-    <h3>Remaining:</h3>
-    <!--Display the amount remaining-->
-    <p>{{ @SESSION.results->getTotal() }}</p>
+<div class="container shadow-sm p-5 mb-5 mt-2 bg-white rounded w-50">
+    <h2 class="text-center">Results</h2>
+    <hr>
+    <div name="pay">
+        <h3>Pay:</h3>
+        <check if="{{ isset(@SESSION.payType) }}">
+            <true>
+                <!--Determine what type of pay we need to display-->
+                <check if="{{ @SESSION.payType == 'hourly' }}">
+                    <true>
+                        <!--Hours-->
+                        <p>{{@SESSION.hours}}</p>
+                        <!--Wage-->
+                        <p>{{@SESSION.wage}}</p>
+                        <!--Total-->
+                        <p>{{@SESSION.total}}</p>
+                        <!--Post-Tax Total-->
+                        <p>{{@SESSION.postTax}}</p>
+                    </true>
+                    <false>
+                        <check if="{{ @SESSION.payType == 'salary' }}">
+                            <true>
+                                <!--Total-->
+                                <p>{{@SESSION.total}}</p>
+                                <!--Post-Tax Total-->
+                                <p>{{@SESSION.postTax}}</p>
+                            </true>
+                            <false>
+                                <check if="{{ @SESSION.payType == 'manual' }}">
+                                    <true>
+                                        <!--Total-->
+                                        <p>{{@SESSION.total}}</p>
+                                    </true>
+                                    <false>
+                                        <!--ERROR-->
+                                        <p>An error has occurred when calculating your pay</p>
+                                    </false>
+                                </check>
+                            </false>
+                        </check>
+                    </false>
+                </check>
+            </true>
+            <false>
+                <p>An Error Has Occurred</p>
+            </false>
+        </check>
+    </div>
+    <div name="expenses">
+        <h3>Expenses:</h3>
+        <!--Loop over and display each expense-->
+        <ul>
+            <repeat group="{{@SESSION.results->getExpenses()}}" value="{{@value}}" >
+                <!--"Name(Amount): new total"-->
+                <li>{{@value->getName()}}({{@value->getAmount()}}):
+                    ${{@SESSION.results->setTotal((@SESSION.results->getTotal())-(@value->getAmount()))}}
+                </li>
+            </repeat>
+        </ul>
+    </div>
+    <div name="remaining">
+        <h3>Remaining:</h3>
+        <!--Display the amount remaining-->
+        <p>{{ @SESSION.results->getTotal() }}</p>
+    </div>
 </div>
 </body>
 </html>

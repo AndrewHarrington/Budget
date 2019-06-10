@@ -35,7 +35,7 @@ $f3->route('GET|POST /', function($f3) {
         $login = validLogin($_POST['email'], $_POST['password']);
         if($login != false){
             $_SESSION['uuid'] = $login;
-            $_SESSION['results'] = new Results(new Manual(10), array());
+            $_SESSION['results'] = new Results(new Manual(400), array());
             $f3->reroute('/pay');
         }
     }
