@@ -17,11 +17,11 @@ class Results
      * @param $_pay
      * @param $_expenses - Array of Expense objects
      */
-    public function __construct($_pay, array $_expenses)
+    public function __construct(Pay $_pay, array $_expenses)
     {
         $this->_pay = $_pay;
         $this->_expenses = $_expenses;
-        $this->_total = $_pay;
+        $this->_total = $_pay->getPay();
     }
 
     /**

@@ -2,6 +2,10 @@
 loadExpenses();
 
 //click events
+$("#finished").on('click', function(){
+    window.location.assign('/328/budget/results');
+});
+
 $("#add").on('click', function(){
     var uuid = $("#uuid").val();
     var name = $("#name").val();
@@ -12,22 +16,9 @@ $("#add").on('click', function(){
     loadExpenses();
 });
 
-$("#finished").on('click', function(){
-    window.location.assign('/328/budget/results');
-});
-
 //functions
 function viewItem(element) {
     //TODO: Make this function display the data of the contained item and allow for editing
-    var item = element.id;
-    var id = item.substring(4)
-
-
-    $(".ex").on('click', function () {
-        // $(".modal-title").html(id);
-
-        $.post("model/ajax/edit-expenses.php", {id: id});
-    })
 }
 
 function delItem(button){

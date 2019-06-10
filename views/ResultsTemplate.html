@@ -14,27 +14,27 @@
             <check if="{{ @SESSION.payType == 'hourly' }}">
                 <true>
                     <!--Hours-->
-                    <p>{{@hours}}</p>
+                    <p>{{@SESSION.hours}}</p>
                     <!--Wage-->
-                    <p>{{@wage}}</p>
+                    <p>{{@SESSION.wage}}</p>
                     <!--Total-->
-                    <p>{{@total}}</p>
+                    <p>{{@SESSION.total}}</p>
                     <!--Post-Tax Total-->
-                    <p>{{@postTax}}</p>
+                    <p>{{@SESSION.postTax}}</p>
                 </true>
                 <false>
                     <check if="{{ @SESSION.payType == 'salary' }}">
                         <true>
                             <!--Total-->
-                            <p>{{@total}}</p>
+                            <p>{{@SESSION.total}}</p>
                             <!--Post-Tax Total-->
-                            <p>{{@postTax}}</p>
+                            <p>{{@SESSION.postTax}}</p>
                         </true>
                         <false>
                             <check if="{{ @SESSION.payType == 'manual' }}">
                                 <true>
                                     <!--Total-->
-                                    <p>{{@total}}</p>
+                                    <p>{{@SESSION.total}}</p>
                                 </true>
                                 <false>
                                     <!--ERROR-->
@@ -54,11 +54,14 @@
 <div name="expenses">
     <h3>Expenses:</h3>
     <!--Loop over and display each expense-->
-    <repeat group="{{@SESSION.results->getExpenses()}}" value="{{@value}}" >
-        <!--"Name(Amount): new total"-->
-        <p>-{{@value->getName()}}({{@value->getAmount()}}):
-            ${{@SESSION.results->setTotal(@SESSION.results->getTotal()-@value->getAmount())}}</p>
-    </repeat>
+    <ul>
+        <repeat group="{{@SESSION.results->getExpenses()}}" value="{{@value}}" >
+            <!--"Name(Amount): new total"-->
+            <li>{{@value->getName()}}({{@value->getAmount()}}):
+                ${{@SESSION.results->setTotal((@SESSION.results->getTotal())-(@value->getAmount()))}}
+            </li>
+        </repeat>
+    </ul>
 </div>
 <div name="remaining">
     <h3>Remaining:</h3>
